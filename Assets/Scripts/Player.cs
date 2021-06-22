@@ -45,8 +45,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private float input;
 
-    // time to determine if dashing is available or not
-
+    private float dashCount, startDashCount = 0.1f;
 
     /// <summary>
     /// Current player health.
@@ -79,11 +78,11 @@ public class Player : MonoBehaviour
     /// </summary>
     void Start()
     {
+        dashCount = startDashCount;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         GameManager.instance().updateHealthText(health);
         GameManager.instance().deathPanelSwitch(false);
-
     }
 
     /// <summary>
@@ -134,9 +133,18 @@ public class Player : MonoBehaviour
     * s/he wants, but when it is available.
     */
     private void Dash(Rigidbody2D rb) {
-        if (Input.GetKey(KeyCode.Space)) {
-            rb.velocity = new Vector2(input * (3*speed), rb.velocity.y); 
+        if (dashCount <= 0) {
+            dashCount = startDashCount;
+            rb.velocity = Vector2.zero;
         }
+
+        else {
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                rb.velocity = new Vector2(input * (15*speed), rb.velocity.y);
+                dashCount -= Time.deltaTime;
+            }
+        }
+
     }
 
     /// <summary>
