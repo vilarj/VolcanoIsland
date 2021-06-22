@@ -118,6 +118,10 @@ public class Player : MonoBehaviour
 
         //move player
         rb.velocity = new Vector2(input * speed, rb.velocity.y);
+
+        if (Input.GetKey(KeyCode.Space)) {
+            rb.velocity *= 5;
+        }
     }
 
     /// <summary>
