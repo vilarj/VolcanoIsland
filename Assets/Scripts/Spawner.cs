@@ -40,6 +40,7 @@ public class Spawner : MonoBehaviour
     /// Array that contains all of the currently active enemy objects.
     /// </summary>
     public GameObject[] enemies;
+    public GameObject[] hearts;
 
     /// <summary>
     /// Time to wait between spawning enemy objects.

@@ -169,6 +169,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void takeHealth(int value) {
+        health += value;
+        GameManager.instance().updateHealthText(health);
+
+        if (health <= 0)
+        {
+            //player dies
+            Instantiate(deathFX, new Vector3(transform.position.x, transform.position.y, 0f), Quaternion.identity);
+            this.gameObject.SetActive(false);
+            //GameObject.Destroy(gameObject); //can't have this for an easy reset
+            GameManager.instance().deathPanelSwitch(true);
+
+        }
+    }
+
     /// <summary>
     /// Resets the game to the initial conditions.
     /// </summary>
