@@ -45,6 +45,9 @@ public class Player : MonoBehaviour
     /// </summary>
     private float input;
 
+    // time to determine if dashing is available or not
+
+
     /// <summary>
     /// Current player health.
     /// </summary>
@@ -119,8 +122,20 @@ public class Player : MonoBehaviour
         //move player
         rb.velocity = new Vector2(input * speed, rb.velocity.y);
 
+        // dash mechanic
+        Dash(rb);
+    }
+
+    /**
+    * This function handles the dash mechanic
+    * when a button (space bar) is triggered.
+    * The function will be effective for a short time
+    * so that the player does not end up using it every time
+    * s/he wants, but when it is available.
+    */
+    private void Dash(Rigidbody2D rb) {
         if (Input.GetKey(KeyCode.Space)) {
-            rb.velocity *= 5;
+            rb.velocity = new Vector2(input * (3*speed), rb.velocity.y); 
         }
     }
 
